@@ -1,25 +1,15 @@
-import pygame, sys, math
-# super duper easy pygame tile map project, but i like this game so i made it while sitting around waiting
+import pygame, sys, math # super duper easy pygame tile map project, but i like this game so i made it while sitting around waiting
 W_WIDTH = 570
 W_HEIGHT = 570
 WIDTH = W_WIDTH/10
 HEIGHT = W_HEIGHT/10
 FPS = 240
-board = [
-[-1,-1, 1, 1, 1,-1,-1],
-[-1,-1, 1, 1, 1,-1,-1],
-[1, 1, 1, 1, 1, 1, 1],
-[1, 1, 1, 0, 1, 1, 1],
-[1, 1, 1, 1, 1, 1, 1],
-[-1,-1, 1, 1, 1,-1,-1],
-[-1,-1, 1, 1, 1,-1,-1],
-]
+board = []
 game = True
 selectedPeg, selectedDest = None, None
 rects = []
 def reset():
     global board
-    print('reset')
     board = [
 [-1,-1, 1, 1, 1,-1,-1],
 [-1,-1, 1, 1, 1,-1,-1],
@@ -43,8 +33,6 @@ def clicked(pos):
             if selectedPeg and selectedDest:
                 dx = selectedDest[0] - selectedPeg[0]
                 dy = selectedDest[1] - selectedPeg[1]
-                print(dx, dy)
-
                 if (dx == 0 or dy == 0) and ((abs(dx) == 2) or (abs(dy) == 2)):
                     board[selectedPeg[0]][selectedPeg[1]] = 0
                     board[selectedDest[0]][selectedDest[1]] = 1
@@ -78,6 +66,7 @@ mainClock = pygame.time.Clock()
 pygame.display.set_caption('Peg Solitare')
 screen = pygame.display.set_mode((W_WIDTH, W_HEIGHT),0,32)
 font = pygame.font.SysFont(None, 30)
+reset()
 while game:
     screen.fill((255, 255, 255))
     textobj = font.render("Simple Peg Solitare", 1, (0, 0, 255))
